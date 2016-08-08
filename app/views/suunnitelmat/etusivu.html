@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Welcome to the memoryapp</h1>
+
+  <h2>Login</h2>
+  <form>
+    <!-- Tekstikenttä käyttäjätunnukselle -->
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control">
+    </div>
+
+    <!-- Salasanakenttä salasanalle -->
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+
+  
+    <button type="submit" class="btn btn-warning">Register</button>
+
+
+
+
+{% endblock %}

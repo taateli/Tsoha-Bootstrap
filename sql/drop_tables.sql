@@ -1,1 +1,7 @@
+DROP TABLE IF EXISTS Task CASCADE; -- Muista IF EXISTS ja CASCADE parametrit!
+DROP TABLE IF EXISTS Taskmaster CASCADE;
+DROP TABLE IF EXISTS Tasktype CASCADE;
+DROP TABLE IF EXISTS Tasksntypes CASCADE;
+
+
 -- Lisää DROP TABLE lauseet tähän tiedostoon
