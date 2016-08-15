@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="alert alert-success">
+  {{message}}
+</div>
+
+  <h1>{{task.name}}</h1>
+  <!-- Painikkeet tähän -->
+  <p>
+    <button class="btn btn-warning">Delete</button> <a href="#" class="btn btn-info">Edit</a>
+  </p>
+  <!-- Tiedot tulee listana tähän -->
+  <ul>
+    <li><strong>Deadline</strong> {{task.deadline}}</li>
+    <li><strong>Where</strong> {{task.place}}</li>
+    <li><strong>Status:</strong> 
+              {% if task.status %}
+                <label class="label label-success">Done
+              {% else %}
+                <label class="label label-danger">Unfinished
+              {% endif %}</li>
+    <li><strong>Added</strong> {{task.added}}</li>
+  </ul>
+    <!-- Kuvaus tulee tähän -->
+  <p>
+    {{task.description}}
+  </p>
+{% endblock %}
