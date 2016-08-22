@@ -10,13 +10,15 @@
     }
 
     public static function sandbox(){
-    
-    $tsoha = Task::find(1);
-    $tasks = Task::all();
-    // Kint-luokan dump-metodi tulostaa muuttujan arvon
-    Kint::dump($tasks);
-    Kint::dump($tsoha);
-  
+      $doom = new Task(array(
+    'name' => 'd',
+    'deadline' => '2016-32-21',
+    'place' => 'id Software',
+    'description' => 'Boom, boom!'
+    ));
+    $errors = $doom->errors();
+
+    Kint::dump($errors);
     }
 
     public static function show_task(){

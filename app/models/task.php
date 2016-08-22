@@ -2,27 +2,27 @@
 
 
 class Task extends BaseModel{
-  // Attribuutit
+  
   public $id, $taskmaster_id, $name, $status, $description, $deadline, $place, $added;
-  // Konstruktori
-
+  
   public function __construct($attributes){
     parent::__construct($attributes);
+    $this->validators = array('validate_name', 'validate_date', 'validate_place');
   }
 
   public static function all(){
-    // Alustetaan kysely tietokantayhteydellämme
+    
     $query = DB::connection()->prepare('SELECT * FROM Task');
-    // Suoritetaan kysely
+    
     $query->execute();
-    // Haetaan kyselyn tuottamat rivit
+    
     $rows = $query->fetchAll();
-    $games = array();
+    $tasks = array();
 
-    // Käydään kyselyn tuottamat rivit läpi
+    
     foreach($rows as $row){
-      // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
-      $games[] = new Task(array(
+      
+      $tasks[] = new Task(array(
         'id' => $row['id'],
         'taskmaster_id' => $row['taskmaster_id'],
         'name' => $row['name'],
@@ -34,7 +34,7 @@ class Task extends BaseModel{
       ));
     }
 
-    return $games;
+    return $tasks;
   }
 
   public static function find($id){
@@ -43,7 +43,7 @@ class Task extends BaseModel{
     $row = $query->fetch();
 
     if($row){
-      $game = new Task(array(
+      $task = new Task(array(
         'id' => $row['id'],
         'taskmaster_id' => $row['taskmaster_id'],
         'name' => $row['name'],
@@ -54,22 +54,65 @@ class Task extends BaseModel{
         'added' => $row['added']
       ));
 
-      return $game;
+      return $task;
     }
 
     return null;
   }
 
     public function save(){
-    // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
+    
     $query = DB::connection()->prepare('INSERT INTO Task (name, deadline, place, description) VALUES (:name, :deadline, :place, :description) RETURNING id');
-    // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
+    
     $query->execute(array('name' => $this->name, 'deadline' => $this->deadline, 'place' => $this->place, 'description' => $this->description));
-    // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
+
     $row = $query->fetch();
 
     $this->id = $row['id'];
   }
+
+    public function update($id){
+      $query = DB::connection()->prepare('UPDATE Task SET name = :name, deadline = :deadline, place = :place, description = :description, status = :status WHERE ID = :id');
+
+      $query->execute(array('name'=> $this->name, 'deadline' => $this->deadline, 'place' => $this->place, 'description' => $this->description, 'status' => $this->status, 'id' => $this->id));
+    }
+
+    public function destroy($id){
+      $query = DB::connection()->prepare('DELETE FROM Task WHERE ID = :id');
+      $query->execute(array('id' => $id));
+
+    }
+
+  public function validate_name(){
+  $errors = array();
+  if($this->name == '' || $this->name == null){
+    $errors[] = 'Task have to have name';
+  }
+  if($this->validate_string_length($this->name, 3)){
+    $errors[] = 'Name should have atleast 3 characters!';
+  }
+
+  return $errors;
+}
+
+  public function validate_date(){
+  $tempDate = explode('-', $this->deadline);
+  $errors = array();
+  if (checkdate($tempDate[1], $tempDate[2], $tempDate[0])) {
+
+  } else {
+     $errors[] = 'Date is incorrect';  }
+  return $errors;   
+}
+
+  public function validate_place(){
+  $errors = array();
+  if($this->place == '' || $this->place == null){
+    $errors[] = 'Place can not be empty';
+  }
+
+  return $errors;
+}
 
 
 }

@@ -8,7 +8,13 @@
   <h1>{{task.name}}</h1>
   <!-- Painikkeet tähän -->
   <p>
-    <button class="btn btn-warning">Delete</button> <a href="#" class="btn btn-info">Edit</a>
+    <form method="post" action="{{base_path}}/task/{{task.id}}/destroy" style="display: inline-block;">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    <form method="get" action="{{base_path}}/task/{{task.id}}/edit" style="display: inline-block;">
+      <button type="submit" class="btn btn-info">Edit</button>
+    </form>
+
   </p>
   <!-- Tiedot tulee listana tähän -->
   <ul>

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Add a task</h1>
+  <h1>Edit task</h1>
 
-  {% if errors %}
+    {% if errors %}
     <div class="alert alert-danger">
       <ul>
         {% for error in errors %}
@@ -12,7 +12,7 @@
     </div>
   {% endif %}
 
-  <form method="post" action="{{base_path}}/task">
+  <form method="post" action="{{base_path}}/task/{{attributes.id}}/edit">
     <div class="form-group">
       <label>Name</label>
       <input type="text" name="name" class="form-control">
@@ -33,11 +33,14 @@
       <input type="text" name="place" class="form-control">
     </div>
 
-
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="status" class="form-control"> Complete!
+      </label>
+    </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="submit" class="btn btn-primary">Save</button>
     </div>
-  </form>
   </form>
 {% endblock %}

@@ -40,3 +40,26 @@
   TaskController::show($id);
   });
 
+  $routes->get('/task/:id/edit', function($id){
+  TaskController::edit($id);
+  });
+
+  $routes->post('/task/:id/edit', function($id){
+  TaskController::update($id);
+  });
+
+  $routes->post('/task/:id/destroy', function($id){
+  TaskController::destroy($id);
+  });
+
+  $routes->get('/login', function(){
+  UserController::login();
+  });
+  $routes->post('/login', function(){
+  UserController::handle_login();
+  });
+
+  $routes->get('/user/new', function(){
+  UserController::create();
+  });
+

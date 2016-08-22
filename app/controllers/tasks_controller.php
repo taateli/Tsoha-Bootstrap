@@ -21,23 +21,67 @@ class TaskController extends BaseController{
   }
 
   public static function store(){
-    // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
+
     $params = $_POST;
-    // Alustetaan uusi Game-luokan olion käyttäjän syöttämillä arvoilla
-    $task = new Task(array(
+    
+    $attributes = new Task(array(
       'name' => $params['name'],
       'description' => $params['description'],
       'deadline' => $params['deadline'],
       'place' => $params['place']
     ));
+    $task = new Task($attributes);
+    $errors = $task->errors();
 
-    Kint::dump($params);
+  if(count($errors) == 0){
+    
+    $Task->save();
 
- 
-    // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
-    $task->save();
-
-    // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
-    Redirect::to('/task/' . $task->id, array('message' => 'Task added to your TO-DO-LIST!'));
+    Redirect::to('/task/' . $task->id, array('message' => 'Task added!'));
+  }else{
+    
+    View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
+  } 
   }
+
+  public static function edit($id){
+    $task = Task::find($id);
+    View::make('task/edit.html', array('attributes' => $task));
+  }
+
+  public static function update($id){
+    $params = $_POST;
+
+    $attributes = array(
+      	'id' => $id,
+        'name' => $params['name'],
+        'status' => $params['status'],
+        'description' => $params['description'],
+        'deadline' => $params['deadline'],
+        'place' => $params['place']
+    );
+
+    
+    $task = new Task($attributes);
+    $errors = $task->errors();
+
+    if(count($errors) > 0){
+      View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+    }else{
+      
+      $task->update($id);
+
+      Redirect::to('/task/' . $task->id, array('message' => 'Task has been updated'));
+    }
+  }
+
+  public static function destroy($id){
+    
+    $task = new Task(array('id' => $id));
+    
+    $task->destroy($id);
+
+    Redirect::to('/task', array('message' => 'Task deleted!'));
+  }
+ 
 }
