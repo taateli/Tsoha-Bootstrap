@@ -2,8 +2,18 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-~/doc/dokumentaatio.pdf
+* [Linkki sovellukseeni](http://tatuhela.users.cs.helsinki.fi/muistilista/)
+
+* [Linkki dokumentaatioon] (~/doc/dokumentaatio.pdf)
+
+* [Linkki etusivulle] (http://tatuhela.users.cs.helsinki.fi/muistilista/)
+
+* [Linkki listaussivuun] (http://tatuhela.users.cs.helsinki.fi/muistilista/todo)
+
+* [Linkki yksittäisen listauksen näkymään] (http://tatuhela.users.cs.helsinki.fi/muistilista/todo/1)
+
+* [Linkki muokkaussivuun] (http://tatuhela.users.cs.helsinki.fi/muistilista/todo/1/edit)
+
 
 ## Työn aihe
 

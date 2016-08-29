@@ -4,7 +4,7 @@ Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://tatuhela.users.cs.helsinki.fi/muistilista/)
 
-* [Linkki dokumentaatioon] (~/doc/dokumentaatio.pdf)
+* [Linkki dokumentaatioon] (https://github.com/taateli/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 * [Linkki etusivulle] (http://tatuhela.users.cs.helsinki.fi/muistilista/)
 
