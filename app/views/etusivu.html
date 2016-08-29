@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Welcome!</h1>
-
-
+  
   {% if errors %}
     <div class="alert alert-danger">
       <ul>
@@ -12,6 +10,16 @@
       </ul>
     </div>
   {% endif %}
+
+{% if message %}
+<div class="alert alert-success">
+  {{message}}
+</div>
+{% endif %}
+
+
+  
+  <h1>Welcome!</h1>
 
   <h2>Login</h2>
   <form method="post" action="{{base_path}}/login">
@@ -25,12 +33,11 @@
       <input type="password" class="form-control" name="password">
     </div>
 
-    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+    <button type="submit" class="btn btn-primary">Login</button>
   </form>
   
-    <form method="get" action="/user/new" style="display: inline-block;">
-      <button type="submit" class="btn btn-warning">Create a user</button>
-    </form>
+    
+  <button type="post" action="{{base_path}}/user/new" class="btn btn-warning">Create a user</button>
 
 
 

@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Tatu's TO-DO-LIST</h1>
+
+ 
+  <div class="alert alert-success">
+  {{message}}
+  </div>
+  
+  {% if user_logged_in %}
+    <h1>{{user_logged_in.name}}'s TO-DO-LIST</h1>
+  {% endif %}
+
 
   <p>
     <a href="{{base_path}}/task/new" class="btn btn-success">Add task</a>
@@ -14,7 +23,6 @@
         <th>Description</th>
         <th>Where</th>
         <th>Status</th>
-        <th>Added</th>
         <th></th>
       </tr>
     </thead>
@@ -33,7 +41,6 @@
                 <label class="label label-danger">Unfinished
               {% endif %}
           </td>
-          <td>{{task.added}}</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Edit</a></td>
         </tr>
       {% endfor %}

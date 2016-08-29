@@ -15,7 +15,7 @@ class User extends BaseModel{
 			$row = $query->fetch();
 			if($row){
 		
-     		 $user = new Task(array(
+     		 $user = new User(array(
         		'id' => $row['id'],
         		'name' => $row['name'],
         		'password' => $row['password'],
@@ -23,11 +23,39 @@ class User extends BaseModel{
       			));
 
       		return $user;
-    } else{
+    } else {
 			return null;
 		}
 
 	}
+
+  public function update($id){
+      $query = DB::connection()->prepare('UPDATE Taskmaster SET password = :password WHERE ID = :id');
+
+      $query->execute(array('password'=> $this->password, 'id' => $this->id));
+    }
+
+
+  public static function find($id){
+    $query = DB::connection()->prepare('SELECT * FROM Taskmaster WHERE id = :id LIMIT 1');
+    $query->execute(array('id' => $id));
+    $row = $query->fetch();
+
+    if($row){
+      $user = new User(array(
+        'id' => $row['id'],
+        'name' => $row['name'],
+        'password' => $row['password'],
+        'joined' => $row['joined']
+        ));
+
+      return $user;
+    }
+    
+    return null;
+  }
+
+
 
 	public function save(){
     

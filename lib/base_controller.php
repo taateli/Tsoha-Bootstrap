@@ -2,11 +2,14 @@
 
   class BaseController{
 
-
     public static function check_logged_in(){
-      // Toteuta kirjautumisen tarkistus tähän.
-      // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
+    if(!isset($_SESSION['user'])){
+      Redirect::to('/', array('message' => 'Login or create a user first!'));
     }
+    }
+
+
+
 
     public static function get_user_logged_in(){
     // Katsotaan onko user-avain sessiossa

@@ -10,11 +10,11 @@ class Task extends BaseModel{
     $this->validators = array('validate_name', 'validate_date', 'validate_place');
   }
 
-  public static function all(){
+  public static function all($taskmaster_id){
     
-    $query = DB::connection()->prepare('SELECT * FROM Task');
+    $query = DB::connection()->prepare('SELECT * FROM Task WHERE taskmaster_id = :taskmaster_id');
     
-    $query->execute();
+    $query->execute(array('taskmaster_id' => $taskmaster_id));
     
     $rows = $query->fetchAll();
     $tasks = array();
@@ -62,9 +62,9 @@ class Task extends BaseModel{
 
     public function save(){
     
-    $query = DB::connection()->prepare('INSERT INTO Task (name, deadline, place, description) VALUES (:name, :deadline, :place, :description) RETURNING id');
+    $query = DB::connection()->prepare('INSERT INTO Task (name, deadline, place, description, taskmaster_id) VALUES (:name, :deadline, :place, :description, :taskmaster_id) RETURNING id');
     
-    $query->execute(array('name' => $this->name, 'deadline' => $this->deadline, 'place' => $this->place, 'description' => $this->description));
+    $query->execute(array('name' => $this->name, 'deadline' => $this->deadline, 'place' => $this->place, 'description' => $this->description, 'taskmaster_id' => $this->taskmaster_id));
 
     $row = $query->fetch();
 
