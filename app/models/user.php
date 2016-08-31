@@ -9,6 +9,12 @@ class User extends BaseModel{
     $this->validators = array('validate_name', 'validate_password');
 }
 
+  public function destroy($id){
+      $query = DB::connection()->prepare('DELETE FROM Taskmaster WHERE ID = :id');
+      $query->execute(array('id' => $id));
+
+    }
+
 	public function authenticate($name, $password) {
 		$query = DB::connection()->prepare('SELECT * FROM Taskmaster WHERE name = :name AND password = :password LIMIT 1');
 			$query->execute(array('name' => $name, 'password' => $password));

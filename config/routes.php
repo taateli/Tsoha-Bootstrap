@@ -1,7 +1,7 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    UserController::login();
   });
 
   $routes->get('/hiekkalaatikko', function() {
@@ -67,3 +67,6 @@
   UserController::update($id);
   });
 
+  $routes->post('/user/:id/destroy', function($id){
+  UserController::destroy($id);
+  });

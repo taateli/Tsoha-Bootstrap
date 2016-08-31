@@ -6,14 +6,10 @@ Yleisiä linkkejä:
 
 * [Linkki dokumentaatioon] (https://github.com/taateli/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
-* [Linkki etusivulle] (http://tatuhela.users.cs.helsinki.fi/muistilista/)
+Käyttötunnus: Admin
+Salasana: 12345
 
-* [Linkki listaussivuun] (http://tatuhela.users.cs.helsinki.fi/muistilista/todo)
-
-* [Linkki yksittäisen listauksen näkymään] (http://tatuhela.users.cs.helsinki.fi/muistilista/todo/1)
-
-* [Linkki muokkaussivuun] (http://tatuhela.users.cs.helsinki.fi/muistilista/todo/1/edit)
-
+Lisäksi voi luoda uuden tunnuksen jos haluaa.
 
 ## Työn aihe
 

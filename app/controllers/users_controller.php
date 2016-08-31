@@ -4,8 +4,7 @@ class UserController extends BaseController{
 
 
   public static function login(){
-
-      View::make('etusivu.html');
+    View::make('etusivu.html');
   }
 
   public static function logout(){
@@ -54,7 +53,6 @@ class UserController extends BaseController{
   }
 
   public static function create(){
-    
     View::make('user/new.html');
   }
 
@@ -66,16 +64,36 @@ class UserController extends BaseController{
     View::make('user/edit.html', array('attributes' => $user));
   }
 
+  public static function destroy($id){
+    self::check_logged_in();
+    $user_logged_in = self::get_user_logged_in();
+    
+    
+    
+    $user->destroy($user_logged_in->id);
+
+    Redirect::to('/', array('message' => 'User deleted!'));
+  }
+
   public static function store(){
 
     $params = $_POST;
     
+    $user = User::authenticate($params['name'], $params['password']);
+
+    if (!$user){
+
+    } else {
+      View::make('user/new.html', array('error' => 'Username already taken', 'username' => $params['name']));
+    }
+
     $attributes = new User(array(
       'name' => $params['name'],
       'password' => $params['password']
     ));
     $taskmaster = new User($attributes);
     $errors = $taskmaster->errors();
+
 
     if(count($errors) == 0){
     

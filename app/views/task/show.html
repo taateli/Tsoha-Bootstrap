@@ -6,17 +6,19 @@
 </div>
 
   <h1>{{task.name}}</h1>
-  <!-- Painikkeet tähän -->
+
   <p>
-    <form method="post" action="{{base_path}}/task/{{task.id}}/destroy" style="display: inline-block;">
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+
     <form method="get" action="{{base_path}}/task/{{task.id}}/edit" style="display: inline-block;">
       <button type="submit" class="btn btn-info">Edit</button>
     </form>
 
+    <form method="post" action="{{base_path}}/task/{{task.id}}/destroy" style="display: inline-block;">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+
   </p>
-  <!-- Tiedot tulee listana tähän -->
+
   <ul>
     <li><strong>Deadline</strong> {{task.deadline}}</li>
     <li><strong>Where</strong> {{task.place}}</li>

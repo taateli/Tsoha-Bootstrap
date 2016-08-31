@@ -98,6 +98,11 @@ class Task extends BaseModel{
   public function validate_date(){
   $tempDate = explode('-', $this->deadline);
   $errors = array();
+
+  if (!$this->deadline) {
+    $errors[] = "Task must have a deadline";
+    return $errors;
+  }  
   if (checkdate($tempDate[1], $tempDate[2], $tempDate[0])) {
 
   } else {
